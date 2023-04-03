@@ -30,11 +30,18 @@ const run = async () => {
 
       res.send(productsArray);
     });
+
+    // Create Product - Insert Data
+    app.post("/product", async (req, res) => {
+      const product = req.body;
+      const result = await productsCollection.insertOne(product);
+      res.send(result);
+    });
   } finally {
     // await client.close() ;
   }
 };
-run().catch(error => console.log(error));
+run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
