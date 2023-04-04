@@ -37,6 +37,15 @@ const run = async () => {
       const result = await productsCollection.insertOne(product);
       res.send(result);
     });
+
+    // Remove Product by ID
+    app.delete("/product/:id", async (req, res) => {
+      const productID = req.params.id;
+      console.log(productID);
+      const query = { _id: new ObjectId(productID) };
+      const result = await productsCollection.deleteOne(query);
+      res.send(result);
+    });
   } finally {
     // await client.close() ;
   }
